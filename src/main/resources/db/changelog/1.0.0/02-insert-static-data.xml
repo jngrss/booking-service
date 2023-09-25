@@ -1,0 +1,34 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="Booking service" id="Insert static room data">
+        <insert tableName="meeting_room">
+            <column name="name" value="Meeting room 1"/>
+        </insert>
+        <insert tableName="meeting_room">
+            <column name="name" value="Meeting room 2"/>
+        </insert>
+        <insert tableName="meeting_room">
+            <column name="name" value="Meeting room 3"/>
+        </insert>
+        <insert tableName="meeting_room">
+            <column name="name" value="Meeting room 4"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="Booking service" id="Insert static equipment data">
+        <insert tableName="equipment">
+            <column name="name" value="Computer"/>
+        </insert>
+        <insert tableName="equipment">
+            <column name="name" value="Projector"/>
+        </insert>
+        <insert tableName="equipment">
+            <column name="name" value="Board"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,111 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="Booking service" id="Initial tables created">
+
+        <createTable tableName="meeting_room">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="equipment">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="booking">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="start_time" type="datetime" />
+            <column name="end_time" type="datetime" />
+            <column name="first_name" type="text" />
+            <column name="last_name" type="text" />
+        </createTable>
+
+<!--        <createTable tableName="booked_resource">-->
+<!--            <column name="booking_id" type="bigint" />-->
+<!--            <column name="room_id" type="bigint" />-->
+<!--            <column name="equipment_id" type="bigint" />-->
+<!--        </createTable>-->
+
+<!--        <addForeignKeyConstraint-->
+<!--                baseTableName="booked_resource"-->
+<!--                baseColumnNames="booking_id"-->
+<!--                constraintName="fk_booked_resource_to_booking"-->
+<!--                referencedTableName="booking"-->
+<!--                referencedColumnNames="id"/>-->
+
+<!--        <addForeignKeyConstraint-->
+<!--                baseTableName="booked_resource"-->
+<!--                baseColumnNames="room_id"-->
+<!--                constraintName="fk_booked_resource_to_meeting_room"-->
+<!--                referencedTableName="meeting_room"-->
+<!--                referencedColumnNames="id"/>-->
+
+<!--        <addForeignKeyConstraint-->
+<!--                baseTableName="booked_resource"-->
+<!--                baseColumnNames="equipment_id"-->
+<!--                constraintName="fk_booked_resource_to_equipment"-->
+<!--                referencedTableName="equipment"-->
+<!--                referencedColumnNames="id"/>-->
+
+        <createTable tableName="booked_room">
+            <column name="booking_id" type="bigint" />
+            <column name="room_id" type="bigint" />
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="booked_room"
+                baseColumnNames="booking_id"
+                constraintName="fk_booked_room_to_booking"
+                referencedTableName="booking"
+                referencedColumnNames="id"
+                onUpdate="CASCADE"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="booked_room"
+                baseColumnNames="room_id"
+                constraintName="fk_booked_room_to_meeting_room"
+                referencedTableName="meeting_room"
+                referencedColumnNames="id"
+                onUpdate="CASCADE"
+                onDelete="CASCADE"/>
+
+        <createTable tableName="booked_equipment">
+            <column name="booking_id" type="bigint" />
+            <column name="equipment_id" type="bigint" />
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="booked_equipment"
+                baseColumnNames="booking_id"
+                constraintName="fk_booked_equipment_to_booking"
+                referencedTableName="booking"
+                referencedColumnNames="id"
+                onUpdate="CASCADE"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                baseTableName="booked_equipment"
+                baseColumnNames="equipment_id"
+                constraintName="fk_booked_equipment_to_equipment"
+                referencedTableName="equipment"
+                referencedColumnNames="id"
+                onUpdate="CASCADE"
+                onDelete="CASCADE"/>
+
+    </changeSet>
+</databaseChangeLog>
